@@ -15,8 +15,8 @@ class OneAwayTest(unittest.TestCase):
     self.assertTrue(actual)
 
   def test_oneaway_missing_letter3(self):
-    actual = one_away("jstn", "justin")
-    self.assertFalse(actual)
+    actual = one_away("jstin", "jsti")
+    self.assertTrue(actual)
 
   def test_oneaway_changed_letter1(self):
     actual = one_away("pale", "bake")
@@ -52,10 +52,13 @@ def one_away(string1, string2):
       string_short = string2
 
     while(i < len(string_long)) and (diff_count <= 1):
-      if string_long[i] != string_short[j]:
+      if j >= len(string_short):
         diff_count += 1
       else:
-        j += 1
+        if string_long[i] != string_short[j]:
+          diff_count += 1
+        else:
+          j += 1
       i += 1
 
   if diff_count > 1:
